@@ -1,10 +1,6 @@
 import 'package:bsu/utils/router.dart';
 import 'package:flutter/material.dart';
 
-// extension IsEn on Widget {
-//   bool get isEn => MagicRouter.currentContext!.locale.languageCode == 'en';
-// }
-
 extension Height on Widget {
   double get height => MediaQuery.of(MagicRouter.currentContext!).size.height;
 }

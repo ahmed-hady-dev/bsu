@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 
+import '../constants/constants.dart';
+
 ThemeData lightTheme(BuildContext context) {
   return ThemeData.light().copyWith(
     textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Montserrat'),
     primaryTextTheme: ThemeData.light().textTheme.apply(fontFamily: 'Montserrat'),
-    primaryColor: Colors.black,
-    scaffoldBackgroundColor: Colors.white,
-    splashColor: Colors.black,
+    appBarTheme: Theme.of(context).appBarTheme.copyWith(
+          centerTitle: true,
+          elevation: 0,
+          color: AppColors.scaffoldColor,
+        ),
+    // primaryColor: Colors.black,
+    scaffoldBackgroundColor: AppColors.scaffoldColor,
+    // splashColor: Colors.black,
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: ZoomPageTransitionsBuilder(),
       },
     ),
     brightness: Brightness.light,
-    dividerColor: Colors.black,
-    colorScheme: Theme.of(context).colorScheme.copyWith(primary: Colors.black, secondary: Colors.black),
+    colorScheme: Theme.of(context).colorScheme.copyWith(
+          primary: AppColors.indigo,
+          secondary: AppColors.indigo,
+        ),
     inputDecorationTheme: InputDecorationTheme(
       focusColor: Colors.cyan,
       filled: true,

@@ -1,10 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bsu/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'utils/hive_helper.dart';
-import 'view/home/home_view.dart';
 import 'utils/theme.dart';
 
 import 'utils/bloc_observer.dart';
@@ -15,7 +16,15 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await HiveHelper.init();
   BlocOverrides.runZoned(
-    () async => runApp(const MyApp()),
+    () async {
+      [
+        Permission.location,
+        Permission.storage,
+        Permission.bluetooth,
+        Permission.bluetoothConnect,
+        Permission.bluetoothScan
+      ].request().then((value) => runApp(const MyApp()));
+    },
     blocObserver: MyBlocObserver(),
   );
 }
@@ -26,8 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //TODO: add your application name here
-      title: '',
+      title: 'Blind Stick',
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       onGenerateRoute: onGenerateRoute,
